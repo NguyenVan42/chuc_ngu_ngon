@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Chúc Ngủ Ngon 😴</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --midnight: #1b2a3b;
+    --indigo: #1e3a5f;
+    --moon: #f5e642;
+    --moon-glow: #fff176;
+    --star: #ffe0b2;
+    --pink: #ff6b9d;
+    --mint: #64ffda;
+    --lavender: #c084fc;
+    --text: #e8f4f8;
+    --subtext: #94b8d0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background: var(--navy);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Stars background */
+  .stars-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .star-dot {
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+    animation: twinkle var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.4); }
+  }
+
+  /* Floating clouds */
+  .cloud {
+    position: fixed;
+    opacity: 0.06;
+    animation: drift var(--cd, 20s) linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes drift {
+    from { transform: translateX(-200px); }
+    to { transform: translateX(calc(100vw + 200px)); }
+  }
+
+  .cloud svg { width: 120px; fill: #8ecae6; }
+
+  /* Main container */
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 430px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 40px 0 20px;
+    animation: slideDown 0.8s ease both;
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .moon-wrap {
+    display: inline-block;
+    margin-bottom: 12px;
+    animation: moonFloat 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(245, 230, 66, 0.6));
+  }
+
+  @keyframes moonFloat {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-12px) rotate(5deg); }
+  }
+
+  .moon-emoji { font-size: 72px; line-height: 1; }
+
+  .header h1 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 32px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--moon), var(--lavender), var(--pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+
+  .header p {
+    color: var(--subtext);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  /* Message cards */
+  .card {
+    background: linear-gradient(135deg, rgba(30, 58, 95, 0.8), rgba(27, 42, 59, 0.9));
+    border: 1px solid rgba(100, 255, 218, 0.12);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .card:hover, .card:active {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(192, 132, 252, 0.04), transparent 60%);
+    pointer-events: none;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card:nth-child(1) { animation-delay: 0.1s; }
+  .card:nth-child(2) { animation-delay: 0.2s; }
+  .card:nth-child(3) { animation-delay: 0.3s; }
+  .card:nth-child(4) { animation-delay: 0.4s; }
+  .card:nth-child(5) { animation-delay: 0.5s; }
+  .card:nth-child(6) { animation-delay: 0.6s; }
+  .card:nth-child(7) { animation-delay: 0.7s; }
+
+  .card-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .card-icon {
+    font-size: 36px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+  }
+
+  .card-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    color: white;
+  }
+
+  .tag-funny { background: linear-gradient(90deg, #ff6b9d, #ff8e53); }
+  .tag-sweet { background: linear-gradient(90deg, #c084fc, #818cf8); }
+  .tag-sarcasm { background: linear-gradient(90deg, #64ffda, #22d3ee); color: #0d1b2a; }
+  .tag-deep { background: linear-gradient(90deg, #fbbf24, #f59e0b); color: #0d1b2a; }
+  .tag-flirt { background: linear-gradient(90deg, #ff6b9d, #f43f5e); }
+
+  /* Flirt section special styling */
+  .flirt-card {
+    background: linear-gradient(135deg, rgba(244, 63, 94, 0.12), rgba(192, 132, 252, 0.1), rgba(13, 27, 42, 0.9));
+    border: 1px solid rgba(255, 107, 157, 0.25);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .flirt-card::before {
+    content: '';
+    position: absolute;
+    top: -60%;
+    right: -30%;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(255, 107, 157, 0.08), transparent 70%);
+    pointer-events: none;
+  }
+
+  .flirt-card:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 10px 35px rgba(255, 107, 157, 0.2);
+  }
+
+  .copy-btn {
+    background: rgba(255, 107, 157, 0.15);
+    border: 1px solid rgba(255, 107, 157, 0.3);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 12px;
+    cursor: pointer;
+    color: #ff6b9d;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 12px;
+  }
+
+  .copy-btn:hover {
+    background: rgba(255, 107, 157, 0.28);
+    border-color: #ff6b9d;
+  }
+
+  .copy-btn.copied {
+    background: rgba(100, 255, 218, 0.15);
+    border-color: var(--mint);
+    color: var(--mint);
+  }
+
+  .hearts-float {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    font-size: 18px;
+    opacity: 0.35;
+    animation: heartPulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes heartPulse {
+    0%, 100% { transform: scale(1); opacity: 0.35; }
+    50% { transform: scale(1.2); opacity: 0.6; }
+  }
+
+  .card-msg {
+    font-family: 'Baloo 2', cursive;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .card-sub {
+    font-size: 12px;
+    color: var(--subtext);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .card-reaction {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .reaction-btn {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--subtext);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .reaction-btn:hover {
+    background: rgba(192, 132, 252, 0.2);
+    border-color: var(--lavender);
+    color: var(--lavender);
+  }
+
+  .reaction-btn.active {
+    background: rgba(192, 132, 252, 0.25);
+    border-color: var(--lavender);
+    color: var(--moon);
+  }
+
+  /* Section title */
+  .section-title {
+    font-family: 'Baloo 2', cursive;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--moon);
+    margin: 28px 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(245, 230, 66, 0.3), transparent);
+  }
+
+  /* Sleep tip cards */
+  .tip-card {
+    background: linear-gradient(135deg, rgba(13, 27, 42, 0.9), rgba(30, 58, 95, 0.5));
+    border: 1px solid rgba(245, 230, 66, 0.15);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .tip-num {
+    font-family: 'Baloo 2', cursive;
+    font-size: 28px;
+    font-weight: 800;
+    color: rgba(245, 230, 66, 0.25);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 32px;
+  }
+
+  .tip-text {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .tip-text strong {
+    color: var(--moon-glow);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* Random button */
+  .random-wrap {
+    text-align: center;
+    margin: 30px 0;
+    animation: fadeUp 0.6s 0.8s ease both;
+  }
+
+  .btn-random {
+    background: linear-gradient(135deg, var(--pink), var(--lavender));
+    border: none;
+    border-radius: 50px;
+    padding: 16px 36px;
+    font-family: 'Baloo 2', cursive;
+    font-size: 17px;
+    font-weight: 800;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 8px 25px rgba(255, 107, 157, 0.35);
+    letter-spacing: 0.5px;
+  }
+
+  .btn-random:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 35px rgba(255, 107, 157, 0.5);
+  }
+
+  .btn-random:active {
+    transform: scale(0.96);
+  }
+
+  /* Popup modal */
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal.show { display: flex; animation: fadeIn 0.3s ease; }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .modal-box {
+    background: linear-gradient(135deg, #1b2a3b, #0d1b2a);
+    border: 1px solid rgba(192, 132, 252, 0.3);
+    border-radius: 24px;
+    padding: 30px 24px;
+    max-width: 380px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  @keyframes popIn {
+    from { transform: scale(0.7) translateY(30px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+  }
+
+  .modal-icon { font-size: 64px; margin-bottom: 16px; animation: modalBounce 1s ease infinite; }
+
+  @keyframes modalBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .modal-msg {
+    font-family: 'Baloo 2', cursive;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .modal-sub {
+    font-size: 13px;
+    color: var(--subtext);
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  .modal-close {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 12px 28px;
+    color: var(--text);
+    font-family: 'Baloo 2', cursive;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .modal-close:hover {
+    background: rgba(192, 132, 252, 0.2);
+    border-color: var(--lavender);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 20px 0;
+    color: rgba(148, 184, 208, 0.4);
+    font-size: 12px;
+    animation: fadeUp 0.6s 1s ease both;
+  }
+
+  .footer span { color: var(--pink); }
+
+  /* Shooting star */
+  .shooting-star {
+    position: fixed;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    animation: shoot 3s linear infinite;
+    opacity: 0;
+  }
+
+  @keyframes shoot {
+    0% { opacity: 0; transform: translate(0, 0); }
+    5% { opacity: 1; }
+    40% { opacity: 0; transform: translate(-300px, 200px); }
+    100% { opacity: 0; transform: translate(-300px, 200px); }
+  }
+
+  .shooting-star::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
+    transform: rotate(144deg);
+    transform-origin: left center;
+  }
+</style>
+</head>
+<body>
+
+<!-- Stars -->
+<div class="stars-bg" id="stars"></div>
+
+<!-- Clouds -->
+<div class="cloud" style="top:10%;--cd:25s;"><svg viewBox="0 0 200 80"><ellipse cx="100" cy="50" rx="80" ry="30"/><ellipse cx="70" cy="40" rx="50" ry="25"/><ellipse cx="130" cy="38" rx="45" ry="22"/></svg></div>
+<div class="cloud" style="top:40%;--cd:35s;animation-delay:-10s;"><svg viewBox="0 0 200 80"><ellipse cx="100" cy="50" rx="80" ry="30"/><ellipse cx="70" cy="40" rx="50" ry="25"/><ellipse cx="130" cy="38" rx="45" ry="22"/></svg></div>
+<div class="cloud" style="top:70%;--cd:30s;animation-delay:-20s;"><svg viewBox="0 0 200 80"><ellipse cx="100" cy="50" rx="80" ry="30"/><ellipse cx="70" cy="40" rx="50" ry="25"/><ellipse cx="130" cy="38" rx="45" ry="22"/></svg></div>
+
+<!-- Shooting stars -->
+<div class="shooting-star" style="top:15%;left:80%;animation-delay:0s;"></div>
+<div class="shooting-star" style="top:30%;left:60%;animation-delay:1.5s;"></div>
+<div class="shooting-star" style="top:8%;left:90%;animation-delay:4s;"></div>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="moon-wrap"><div class="moon-emoji">🌙</div></div>
+    <h1>Chúc Ngủ Ngon!</h1>
+    <p>✨ Tổng hợp những lời chúc siêu hài siêu dễ thương ✨</p>
+  </div>
+
+  <!-- Random button -->
+  <div class="random-wrap">
+    <button class="btn-random" onclick="showRandom()">🎲 Rút ngẫu nhiên một lời chúc!</button>
+  </div>
+
+  <!-- Funny messages section -->
+  <div class="section-title">😂 Hài hước bá đạo</div>
+
+  <div class="card" onclick="react(this)">
+    <div class="card-top">
+      <div class="card-icon">🐑</div>
+      <span class="card-tag tag-funny">Hài hước</span>
+    </div>
+    <div class="card-msg">"Chúc mày ngủ ngon! Nếu không ngủ được thì cứ đếm cừu đi. Đếm đến 1000 con không ngủ được thì thôi, dậy làm việc đi cho rồi 😂"</div>
+    <div class="card-sub">— Lời khuyên từ người bạn thực tế nhất thế giới</div>
+    <div class="card-reaction">
+      <button class="reaction-btn" onclick="addReact(event,this,'😂')">😂 <span>24</span></button>
+      <button class="reaction-btn" onclick="addReact(event,this,'💀')">💀 <span>12</span></button>
+      <button class="reaction-btn" onclick="addReact(event,this,'🫡')">🫡 <span>8</span></button>
+    </div>
+  </div>
+
+  <div class="card" onclick="react(this)">
+    <div class="card-top">
+      <div class="card-icon">👻</div>
+      <span class="card-tag tag-sarcasm">Châm biếm</span>
+    </div>
+    <div class="card-msg">"Ngủ ngon nhé! Nhớ khóa cửa lại không thì mơ thấy ma cũng không có ai cứu đâu đấy 🙂"</div>
+    <div class="card-sub">— Bạn thân mà không lo cho nhau thì lo cho ai</div>
+    <div class="card-reaction">
+      <button class="reaction-btn" onclick="addReact(event,this,'😂')">😂 <span>31</span></button>
+      <button class="reaction-btn" onclick="addReact(event,this,'😤')">😤 <span>5</span></button>
+      <button class="reaction-btn" onclick="addReact(event,this,'🫶')">🫶 <span>9</span></button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-icon">💤</div>
+      <span class="card-tag tag-funny">Hài hước</span>
+    </div>
+    <div class="card-msg">"Ngủ ngon! Ước gì ngủ được như mày — vừa nằm xuống đã ngáy như sấm, không có nỗi lo nào trên đời hết 😭✨"</div>
+    <div class="card-sub">— Tâm tư của người mất ngủ lúc 3 giờ sáng</div>
+    <div class="card-reaction">
+      <button class="reaction-btn" onclick="addReact(event,this,'😭')">😭 <span>47</span></button>
+      <button class="reaction-btn" onclick="addReact(event,this,'😂')">😂 <span>33</span></button>
+      <button class="reaction-btn" onclick="addReact(event,this,'💀')">💀 <span>19</span></button>
+    </div>
+  </div>
+
+  <!-- Sweet section -->
+  <div class="section-title">🥰 Dễ thương hết nấc</div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-icon">🌟</div>
+      <span class="card-tag tag-sweet">Dễ thương</span>
+    </div>
+    <div class="card-msg">"Chúc em ngủ ngon như con mèo béo nằm sưởi nắng, không lo không nghĩ, chỉ có ấm áp và bình yên thôi nha 🐱☀️"</div>
+    <div class="card-sub">— Ước ngủ được như mèo là hạnh phúc nhất đời</div>
+    <div class="card-reaction">
+      <button class="reaction-btn" onclick="addReact(event,this,'🥺')">🥺 <span>58</span></button>
+      <button class="reaction-btn" onclick="addReact(event,this,'🐱')">🐱 <span>41</span></button>
+      <button class="reaction-btn" onclick="addReact(event,this,'💕')">💕 <span>27</span></button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-icon">🍵</div>
+      <span class="card-tag tag-sweet">Dễ thương</span>
+    </div>
+    <div class="card-msg">"Ngủ ngon bạn ơi! Nhớ đắp chăn vào, tắt điện thoại xuống... ồ khoan, đọc cái này xong đã rồi hãy tắt nha 😌🌙"</div>
+    <div class="card-sub">— Lời chúc ngủ ngon... nhưng mà hãy đọc nốt đi đã</div>
+    <div class="card-reaction">
+      <button class="reaction-btn" onclick="addReact(event,this,'😂')">😂 <span>72</span></button>
+      <button class="reaction-btn" onclick="addReact(event,this,'🤙')">🤙 <span>15</span></button>
+      <button class="reaction-btn" onclick="addReact(event,this,'😴')">😴 <span>23</span></button>
+    </div>
+  </div>
+
+  <!-- Deep/Philosophical -->
+  <div class="section-title">🧠 Sâu sắc kiểu gì đó</div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-icon">🌌</div>
+      <span class="card-tag tag-deep">Triết lý</span>
+    </div>
+    <div class="card-msg">"Mỗi đêm ta chìm vào giấc ngủ là ta tạm biệt một ngày đã qua. Chúc mày tạm biệt hôm nay thật nhanh vì hôm nay... cũng chán phết 😐"</div>
+    <div class="card-sub">— Triết học lúc nửa đêm của người hơi tiêu cực chút</div>
+    <div class="card-reaction">
+      <button class="reaction-btn" onclick="addReact(event,this,'😭')">😭 <span>88</span></button>
+      <button class="reaction-btn" onclick="addReact(event,this,'💀')">💀 <span>64</span></button>
+      <button class="reaction-btn" onclick="addReact(event,this,'🥲')">🥲 <span>52</span></button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-icon">⏰</div>
+      <span class="card-tag tag-sarcasm">Thực tế</span>
+    </div>
+    <div class="card-msg">"Ngủ ngon! Ngày mai sẽ đẹp hơn... hoặc không, nhưng ít ra mày sẽ đủ sức chịu đựng nó hơn sau khi ngủ 8 tiếng 💪😅"</div>
+    <div class="card-sub">— Động lực ngủ sớm dành cho người thực dụng</div>
+    <div class="card-reaction">
+      <button class="reaction-btn" onclick="addReact(event,this,'😂')">😂 <span>96</span></button>
+      <button class="reaction-btn" onclick="addReact(event,this,'💯')">💯 <span>43</span></button>
+      <button class="reaction-btn" onclick="addReact(event,this,'🫂')">🫂 <span>31</span></button>
+    </div>
+  </div>
+
+  <!-- Flirt section -->
+  <div class="section-title" style="color:var(--pink);">💘 Thả thính người thương</div>
+
+  <div class="flirt-card">
+    <div class="hearts-float">💗</div>
+    <div class="card-top">
+      <div class="card-icon">🌙</div>
+      <span class="card-tag tag-flirt">Thả thính</span>
+    </div>
+    <div class="card-msg">"Ngủ ngon nha! Chỉ cần biết rằng... tối nay có một người đang nhìn lên bầu trời và thầm ước ngôi sao kia là em 🌟"</div>
+    <div class="card-sub">— Cách thả thính nhẹ nhàng mà chết người nhất</div>
+    <button class="copy-btn" onclick="copyMsg(this, 'Ngủ ngon nha! Chỉ cần biết rằng... tối nay có một người đang nhìn lên bầu trời và thầm ước ngôi sao kia là em 🌟')">📋 Copy để gửi liền</button>
+  </div>
+
+  <div class="flirt-card">
+    <div class="hearts-float">💓</div>
+    <div class="card-top">
+      <div class="card-icon">😴</div>
+      <span class="card-tag tag-flirt">Thả thính</span>
+    </div>
+    <div class="card-msg">"Chúc em ngủ ngon! Mà anh/chị đoán là em sẽ ngủ được luôn vì... người ta hay ngủ ngon khi trong lòng không có gì lo. Anh/chị thì khác, cứ nghĩ đến em là thức hoài 🥲"</div>
+    <div class="card-sub">— Thính cấp độ khiến tim người ta rung nhẹ</div>
+    <button class="copy-btn" onclick="copyMsg(this, 'Chúc em ngủ ngon! Mà anh/chị đoán là em sẽ ngủ được luôn vì... người ta hay ngủ ngon khi trong lòng không có gì lo. Anh/chị thì khác, cứ nghĩ đến em là thức hoài 🥲')">📋 Copy để gửi liền</button>
+  </div>
+
+  <div class="flirt-card">
+    <div class="hearts-float">🩷</div>
+    <div class="card-top">
+      <div class="card-icon">⭐</div>
+      <span class="card-tag tag-flirt">Thả thính</span>
+    </div>
+    <div class="card-msg">"Ngủ ngon em! Nhớ mơ đẹp nha... mà nếu trong mơ có ai xuất hiện thì người đó chắc chắn không phải anh/chị đâu. Hoặc là. Không biết nữa 😶‍🌫️💕"</div>
+    <div class="card-sub">— Thính kiểu hổng dám nhận mà cũng không chối</div>
+    <button class="copy-btn" onclick="copyMsg(this, 'Ngủ ngon em! Nhớ mơ đẹp nha... mà nếu trong mơ có ai xuất hiện thì người đó chắc chắn không phải anh/chị đâu. Hoặc là. Không biết nữa 😶‍🌫️💕')">📋 Copy để gửi liền</button>
+  </div>
+
+  <div class="flirt-card">
+    <div class="hearts-float">❤️</div>
+    <div class="card-top">
+      <div class="card-icon">🌸</div>
+      <span class="card-tag tag-flirt">Thả thính</span>
+    </div>
+    <div class="card-msg">"Ngủ ngon! Hôm nay em có biết mình đã làm anh/chị cười bao nhiêu lần không? Anh/chị cũng không đếm được nữa. Thôi cứ ngủ ngon đi, sáng mai tiếp tục nhé 🌷"</div>
+    <div class="card-sub">— Thính ngọt như đường phèn, không gây sâu răng</div>
+    <button class="copy-btn" onclick="copyMsg(this, 'Ngủ ngon! Hôm nay em có biết mình đã làm anh/chị cười bao nhiêu lần không? Anh/chị cũng không đếm được nữa. Thôi cứ ngủ ngon đi, sáng mai tiếp tục nhé 🌷')">📋 Copy để gửi liền</button>
+  </div>
+
+  <div class="flirt-card">
+    <div class="hearts-float">💝</div>
+    <div class="card-top">
+      <div class="card-icon">🔮</div>
+      <span class="card-tag tag-flirt">Thả thính</span>
+    </div>
+    <div class="card-msg">"Trước khi ngủ thì nhắm mắt lại, nghĩ đến người mình thích một giây thôi. Khoa học nói làm vậy sẽ ngủ ngon hơn. Ps: anh/chị vừa tự đặt ra cái khoa học này 🙃💘"</div>
+    <div class="card-sub">— Thính có vẻ khoa học nhưng thật ra không phải</div>
+    <button class="copy-btn" onclick="copyMsg(this, 'Trước khi ngủ thì nhắm mắt lại, nghĩ đến người mình thích một giây thôi. Khoa học nói làm vậy sẽ ngủ ngon hơn. Ps: anh/chị vừa tự đặt ra cái khoa học này 🙃💘')">📋 Copy để gửi liền</button>
+  </div>
+
+  <!-- Sleep tips (funny) -->
+  <div class="section-title">💡 Bí kíp ngủ ngon</div>
+
+  <div class="tip-card">
+    <div class="tip-num">01</div>
+    <div class="tip-text">
+      <strong>Tắt điện thoại ngay lập tức</strong>
+      Hoặc ít ra là để ngửa màn hình xuống, giả vờ như mày không còn quan tâm nữa. Cơ bản là không được nhìn vào.
+    </div>
+  </div>
+
+  <div class="tip-card">
+    <div class="tip-num">02</div>
+    <div class="tip-text">
+      <strong>Đừng nghĩ đến chuyện embarrassing từ 5 năm trước</strong>
+      Dễ thôi, cứ nhắm mắt lại là ký ức xấu hổ sẽ tự xuất hiện đầy đủ trong đầu. Mấu chốt là... chúc may mắn 😂
+    </div>
+  </div>
+
+  <div class="tip-card">
+    <div class="tip-num">03</div>
+    <div class="tip-text">
+      <strong>Uống trà hoa cúc hoặc sữa ấm</strong>
+      Khoa học chứng minh giúp dễ ngủ. Còn nếu không có thì uống nước lọc rồi tự kỷ ám thị cũng được.
+    </div>
+  </div>
+
+  <div class="tip-card">
+    <div class="tip-num">04</div>
+    <div class="tip-text">
+      <strong>Nghe nhạc ru ngủ lofi</strong>
+      Hoặc nghe podcast về môn học nhàm chán nhất hồi đi học. Đảm bảo ngủ trong vòng 3 phút.
+    </div>
+  </div>
+
+  <!-- Final message -->
+  <div style="text-align:center;margin:30px 0;animation:fadeUp 0.6s 1s ease both;">
+    <div style="font-size:48px;margin-bottom:12px;animation:moonFloat 3s ease-in-out infinite;">😴</div>
+    <div style="font-family:'Baloo 2',cursive;font-size:22px;font-weight:800;color:var(--moon);margin-bottom:8px;">Ngủ ngon nha! 🌙✨</div>
+    <div style="color:var(--subtext);font-size:13px;line-height:1.7;">Dù hôm nay có tệ đến đâu,<br>thì trong giấc mơ mày vẫn là người chiến thắng 💫</div>
+  </div>
+
+  <div class="footer">Made with <span>♥</span> và rất nhiều caffeine · © 2024</div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal" onclick="closeModal(event)">
+  <div class="modal-box" id="modal-box">
+    <div class="modal-icon" id="modal-icon">🌙</div>
+    <div class="modal-msg" id="modal-msg">Loading...</div>
+    <div class="modal-sub" id="modal-sub"></div>
+    <button class="modal-close" onclick="document.getElementById('modal').classList.remove('show')">Ngủ ngon rồi đây! 😴</button>
+  </div>
+</div>
+
+<script>
+  // Generate stars
+  const starsContainer = document.getElementById('stars');
+  for (let i = 0; i < 120; i++) {
+    const s = document.createElement('div');
+    s.className = 'star-dot';
+    const size = Math.random() * 2.5 + 0.5;
+    s.style.cssText = `
+      width:${size}px;height:${size}px;
+      top:${Math.random()*100}%;left:${Math.random()*100}%;
+      --dur:${2+Math.random()*4}s;
+      --delay:-${Math.random()*5}s;
+    `;
+    starsContainer.appendChild(s);
+  }
+
+  // Random messages pool
+  const messages = [
+    { icon: '🐑', msg: 'Đếm 1000 con cừu không ngủ được thì dậy đi làm cho rồi 😂', sub: 'Lời khuyên thực tế nhất đêm nay' },
+    { icon: '👻', msg: 'Nhớ khóa cửa lại! Không thì mơ thấy ma cũng không ai cứu đâu 🙂', sub: 'Bạn thân chân thật' },
+    { icon: '🌟', msg: 'Ngủ ngon như con mèo béo nằm sưởi nắng nha! 🐱☀️', sub: 'Ước mơ của tất cả chúng ta' },
+    { icon: '💤', msg: 'Ước gì tao cũng ngủ được như mày — nằm xuống là ngáy luôn 😭', sub: 'Tâm tư lúc 3 giờ sáng' },
+    { icon: '🌙', msg: 'Ngủ ngon! Ngày mai sẽ tốt hơn... hoặc không, nhưng ít ra mày sẽ có sức chịu đựng hơn 💪', sub: 'Động lực thực tế' },
+    { icon: '⭐', msg: 'Chúc mày mơ thấy mình trả hết nợ, đẹp trai/gái hơn và sếp xin lỗi mày 🥲✨', sub: 'Giấc mơ đẹp nhất đời' },
+    { icon: '🍀', msg: 'Tắt điện thoại đi! Cái app nào cũng có thể đợi... kể cả cái này 😌', sub: 'Đây là lời chúc cuối cùng đêm nay, hứa đó' },
+    { icon: '🦋', msg: 'Trong giấc mơ đêm nay, mày sẽ là phiên bản tốt nhất của chính mình 🌈', sub: 'Ngủ đủ giấc đi rồi ngày mai chiến!' },
+    { icon: '🎭', msg: 'Ngủ ngon! Đừng lo về email chưa trả lời — sáng mai vẫn còn đó mà 😅', sub: 'Email không biến mất, nhưng giấc ngủ thì có' },
+    { icon: '🌊', msg: 'Chúc mày ngủ sâu đến mức báo thức reo cũng không nghe thấy... khoan không, đừng làm vậy 😬', sub: 'Nhớ dậy đúng giờ nha!' },
+    { icon: '💘', msg: 'Tối nay có một người đang nhìn lên bầu trời và thầm ước ngôi sao kia là em 🌟', sub: 'Thính nhẹ mà chết người' },
+    { icon: '🥲', msg: 'Người ta hay ngủ ngon khi trong lòng không lo. Anh/chị thì cứ nghĩ đến em là thức hoài 🥲', sub: 'Thính cấp độ rung tim' },
+    { icon: '🌷', msg: 'Hôm nay em có biết mình đã làm anh/chị cười bao nhiêu lần không? Đếm không xuể 🌷', sub: 'Thính ngọt như đường phèn' },
+  ];
+
+  function showRandom() {
+    const r = messages[Math.floor(Math.random() * messages.length)];
+    document.getElementById('modal-icon').textContent = r.icon;
+    document.getElementById('modal-msg').textContent = r.msg;
+    document.getElementById('modal-sub').textContent = r.sub;
+    document.getElementById('modal').classList.add('show');
+  }
+
+  function closeModal(e) {
+    if (e.target === document.getElementById('modal')) {
+      document.getElementById('modal').classList.remove('show');
+    }
+  }
+
+  // Reaction buttons
+  function addReact(e, btn, emoji) {
+    e.stopPropagation();
+    btn.classList.toggle('active');
+    const span = btn.querySelector('span');
+    const num = parseInt(span.textContent);
+    span.textContent = btn.classList.contains('active') ? num + 1 : num - 1;
+  }
+
+  function copyMsg(btn, text) {
+    navigator.clipboard.writeText(text).then(() => {
+      btn.classList.add('copied');
+      btn.innerHTML = '✅ Đã copy!';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = '📋 Copy để gửi liền';
+      }, 2000);
+    });
+  }
+
+  function react(card) {
+    card.style.transform = 'scale(1.02)';
+    setTimeout(() => card.style.transform = '', 150);
+  }
+</script>
+</body>
+</html>
